@@ -61,7 +61,7 @@ html[data-concept="cove"] span.copy-cove { display: inline; }
 
 /* ---------- switcher / nav ---------- */
 .switcher-bar {
-  position: sticky; top: 0; z-index: 50;
+  position: sticky; top: 38px; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 32px;
   background: var(--bg-raised);
@@ -77,21 +77,37 @@ html[data-concept="cove"] span.copy-cove { display: inline; }
   letter-spacing: 0.03em; transition: color 0.2s ease;
 }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
-.switcher-group { display: flex; align-items: center; gap: 10px; }
-.switcher-group .concept-label {
-  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted);
+
+/* ---------- demo toolbar — deliberately hardcoded, NEVER uses --bg/--fg/--accent ----------
+   This bar must look identical regardless of which concept is active: it's the
+   demo harness, not the site. Never wire it to the themed custom properties. */
+.demo-toolbar {
+  position: sticky; top: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 32px;
+  background: #0b0b0d; color: #f4f4f5;
+  font-family: 'Archivo', sans-serif;
+  border-bottom: 1px dashed #46464c;
+  flex-wrap: wrap; gap: 10px;
 }
-.switcher-tabs { display: flex; gap: 4px; }
-.switcher-tabs button {
-  font-family: var(--font-sans); font-weight: 700; font-size: 10.5px;
+.demo-toolbar .demo-label {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a8a92;
+}
+.demo-toolbar .concept-label {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8a92;
+}
+.demo-toolbar .switcher-tabs { display: flex; gap: 4px; align-items: center; }
+.demo-toolbar .switcher-tabs button {
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 10.5px;
   letter-spacing: 0.05em; text-transform: uppercase;
-  padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line);
-  background: transparent; color: var(--fg-muted); cursor: pointer;
-  transition: all 0.25s ease;
+  padding: 5px 12px; border-radius: 999px; border: 1px solid #46464c;
+  background: transparent; color: #c8c8cf; cursor: pointer;
+  transition: all 0.2s ease;
 }
-.switcher-tabs button.active {
-  background: var(--accent); color: var(--accent-fg); border-color: var(--accent);
+.demo-toolbar .switcher-tabs button.active {
+  background: #f4f4f5; color: #0b0b0d; border-color: #f4f4f5;
 }
+.demo-toolbar .switcher-group { display: flex; align-items: center; gap: 10px; }
 
 /* ---------- hero ---------- */
 .hero {
