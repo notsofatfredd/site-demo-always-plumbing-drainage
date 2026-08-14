@@ -9,17 +9,17 @@
     buttons.forEach(function (btn) {
       var active = btn.dataset.set === current;
       btn.classList.toggle('active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      btn.setAttribute('aria-checked', active ? 'true' : 'false');
 
       btn.addEventListener('click', function () {
         document.documentElement.setAttribute('data-concept', btn.dataset.set);
         localStorage.setItem('concept', btn.dataset.set);
         buttons.forEach(function (b) {
           b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
+          b.setAttribute('aria-checked', 'false');
         });
         btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
+        btn.setAttribute('aria-checked', 'true');
 
         document.querySelectorAll('.headline .line span').forEach(function (el) {
           el.style.animation = 'none';

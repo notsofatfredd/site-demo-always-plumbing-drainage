@@ -1,0 +1,5 @@
+_shots/
+_verify*.js
+.DS_Store
+Thumbs.db
+node_modules/

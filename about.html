@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -36,10 +37,10 @@
   <span class="demo-label">Demo Harness — Not Part Of The Site</span>
   <div class="switcher-group">
     <span class="concept-label">Concept</span>
-    <div class="switcher-tabs" role="tablist" aria-label="Concept switcher">
-      <button data-set="onyx" role="tab">Onyx</button>
-      <button data-set="delta" role="tab">Delta</button>
-      <button data-set="cove" role="tab">Cove</button>
+    <div class="switcher-tabs" role="radiogroup" aria-label="Concept switcher">
+      <button data-set="onyx" role="radio" aria-checked="true">Onyx</button>
+      <button data-set="delta" role="radio" aria-checked="false">Delta</button>
+      <button data-set="cove" role="radio" aria-checked="false">Cove</button>
     </div>
   </div>
 </div>
