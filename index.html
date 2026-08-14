@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en" data-concept="onyx">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Always Plumbing & Drainage — Concept Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Archivo', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html[data-concept="onyx"] {
+    --c-50:  #f4f5f7; --c-100: #e3e5e9; --c-200: #c3c7cf;
+    --c-300: #9aa0ac; --c-400: #6b7280; --c-500: #454b57;
+    --c-600: #2c3038; --c-700: #1c1f25; --c-800: #101215;
+    --c-900: #08090b;
+    --bg: var(--c-900); --bg-raised: var(--c-800); --fg: var(--c-50);
+    --fg-muted: var(--c-300); --accent: #4f7cff; --accent-fg: #05070d;
+    --line: var(--c-700);
+    --tracking-tight: -0.02em;
+  }
+
+  html[data-concept="delta"] {
+    --c-50:  #f6f7f9; --c-100: #e8eaee; --c-200: #cdd2db;
+    --c-300: #a7afbe; --c-400: #6e7893; --c-500: #3f4a63;
+    --c-600: #2a3348; --c-700: #1b2233; --c-800: #121724;
+    --c-900: #0b0f18;
+    --bg: var(--c-50); --bg-raised: #ffffff; --fg: var(--c-800);
+    --fg-muted: var(--c-500); --accent: #8a6a2f; --accent-fg: #ffffff;
+    --line: var(--c-200);
+    --tracking-tight: 0em;
+  }
+
+  html[data-concept="cove"] {
+    --c-50:  #fff9f2; --c-100: #ffefdb; --c-200: #ffd9ad;
+    --c-300: #ffbd74; --c-400: #f2954a; --c-500: #d97128;
+    --c-600: #a8541c; --c-700: #4a3324; --c-800: #241a15;
+    --c-900: #14100c;
+    --bg: var(--c-900); --bg-raised: var(--c-700); --fg: var(--c-50);
+    --fg-muted: var(--c-300); --accent: #ff8a3d; --accent-fg: #14100c;
+    --line: var(--c-700);
+    --tracking-tight: -0.01em;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    transition: background 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  /* ---------- concept-scoped copy ---------- */
+  .concept-copy { display: none; }
+  html[data-concept="onyx"] .copy-onyx { display: block; }
+  html[data-concept="delta"] .copy-delta { display: block; }
+  html[data-concept="cove"] .copy-cove { display: block; }
+  span.concept-copy.copy-onyx, span.concept-copy.copy-delta, span.concept-copy.copy-cove { display: none; }
+  html[data-concept="onyx"] span.copy-onyx { display: inline; }
+  html[data-concept="delta"] span.copy-delta { display: inline; }
+  html[data-concept="cove"] span.copy-cove { display: inline; }
+
+  /* ---------- switcher ---------- */
+  .switcher-bar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+    background: var(--bg-raised);
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .switcher-bar .label { color: var(--fg-muted); letter-spacing: 0.08em; text-transform: uppercase; font-size: 11px; }
+  .switcher-tabs { display: flex; gap: 6px; }
+  .switcher-tabs button {
+    font-family: var(--font-sans); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line);
+    background: transparent; color: var(--fg-muted); cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .switcher-tabs button.active {
+    background: var(--accent); color: var(--accent-fg); border-color: var(--accent);
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 82vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 8vw;
+    overflow: hidden;
+  }
+  .ghost-watermark {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-serif); font-style: italic; font-weight: 300;
+    font-size: clamp(6rem, 22vw, 20rem);
+    color: var(--fg);
+    opacity: 0.045;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    animation: drift 22s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    from { transform: translate(-52%, -50%); }
+    to   { transform: translate(-48%, -50%); }
+  }
+
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 22px;
+  }
+
+  .headline {
+    font-family: var(--font-serif); font-weight: 300;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    letter-spacing: var(--tracking-tight);
+    max-width: 16ch;
+    margin-bottom: 28px;
+  }
+  .headline .line { display: block; overflow: hidden; }
+  .headline .line span {
+    display: block;
+    transform: translateY(110%);
+    animation: reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .headline .line:nth-child(1) span { animation-delay: 0.05s; }
+  .headline .line:nth-child(2) span { animation-delay: 0.2s; }
+  .headline .line:nth-child(3) span { animation-delay: 0.35s; }
+  @keyframes reveal { to { transform: translateY(0); } }
+
+  .subhead {
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: var(--fg-muted);
+    max-width: 46ch;
+    margin-bottom: 36px;
+    font-weight: 400;
+  }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 15px 28px; border-radius: 4px;
+    font-weight: 700; font-size: 14px; letter-spacing: 0.02em;
+    text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-fg); }
+  .btn-ghost { border-color: var(--line); color: var(--fg); }
+
+  .rating-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--fg-muted); margin-top: 28px;
+  }
+  .rating-badge strong { color: var(--fg); }
+
+  /* ---------- marquee ---------- */
+  .marquee-strip {
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    overflow: hidden; white-space: nowrap; background: var(--bg-raised);
+    padding: 16px 0;
+  }
+  .marquee-track {
+    display: inline-block;
+    font-family: var(--font-sans); font-weight: 900; font-size: 15px;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--fg-muted);
+    animation: scroll 28s linear infinite;
+  }
+  .marquee-track span { margin: 0 22px; }
+  .marquee-track span::after { content: '•'; margin-left: 22px; color: var(--accent); }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ---------- trust / credentials ---------- */
+  .section { padding: 90px 8vw; }
+  .section-head { max-width: 60ch; margin-bottom: 48px; }
+  .section-eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: var(--font-serif); font-weight: 300; font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+    letter-spacing: var(--tracking-tight);
+  }
+  .section-body { color: var(--fg-muted); font-size: 16px; max-width: 60ch; margin-top: 14px; }
+
+  .credential-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px; background: var(--line); border: 1px solid var(--line);
+  }
+  .credential {
+    background: var(--bg); padding: 28px 24px;
+  }
+  .credential .num {
+    font-family: var(--font-serif); font-weight: 300; font-size: 2.6rem; color: var(--accent);
+    display: block; margin-bottom: 6px;
+  }
+  .credential .desc { font-size: 13px; color: var(--fg-muted); letter-spacing: 0.02em; }
+
+  /* ---------- services ---------- */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;
+  }
+  .service-card {
+    border: 1px solid var(--line); border-radius: 6px; padding: 28px;
+    background: var(--bg-raised);
+  }
+  .service-card .icon {
+    width: 36px; height: 36px; margin-bottom: 18px;
+    stroke: var(--accent); fill: none; stroke-width: 1.6;
+  }
+  .service-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .service-card p { font-size: 13.5px; color: var(--fg-muted); }
+
+  /* ---------- area ---------- */
+  .area-list { display: flex; flex-wrap: wrap; gap: 10px; }
+  .area-pill {
+    padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px;
+    font-size: 13px; color: var(--fg-muted);
+  }
+
+  /* ---------- footer / contact ---------- */
+  .contact-band {
+    background: var(--bg-raised); border-top: 1px solid var(--line);
+    padding: 70px 8vw; text-align: center;
+  }
+  .contact-band .section-title { margin: 0 auto 18px; }
+  .contact-band .phone {
+    font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 500;
+    color: var(--accent); text-decoration: none; display: inline-block; margin: 18px 0 8px;
+  }
+  footer {
+    padding: 28px 8vw; display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--fg-muted); border-top: 1px solid var(--line); flex-wrap: wrap; gap: 10px;
+  }
+  .wordmark {
+    font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 16px; color: var(--fg);
+  }
+  .wordmark b { font-family: var(--font-sans); font-style: normal; font-weight: 900; letter-spacing: 0.02em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ghost-watermark { animation: none; }
+    .headline .line span { animation: none; transform: translateY(0); }
+    .marquee-track { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="switcher-bar">
+  <span class="label">Concept demo — Always Plumbing & Drainage</span>
+  <div class="switcher-tabs" role="tablist" aria-label="Concept switcher">
+    <button data-set="onyx" class="active" role="tab" aria-selected="true">Onyx</button>
+    <button data-set="delta" role="tab" aria-selected="false">Delta</button>
+    <button data-set="cove" role="tab" aria-selected="false">Cove</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="ghost-watermark" aria-hidden="true">Always</div>
+
+  <div class="eyebrow">
+    <span class="concept-copy copy-onyx">Gippsland Plumbing &amp; Drainage</span>
+    <span class="concept-copy copy-delta">Licensed Local Service Provider</span>
+    <span class="concept-copy copy-cove">Always Plumbing &amp; Drainage</span>
+  </div>
+
+  <h1 class="headline">
+    <div class="concept-copy copy-onyx">
+      <span class="line"><span>Gippsland's plumbing</span></span>
+      <span class="line"><span>standard just moved.</span></span>
+    </div>
+    <div class="concept-copy copy-delta">
+      <span class="line"><span>Licensed. Registered.</span></span>
+      <span class="line"><span>Accountable to Gippsland.</span></span>
+    </div>
+    <div class="concept-copy copy-cove">
+      <span class="line"><span>Building Gippsland's</span></span>
+      <span class="line"><span>most complete plumbing service.</span></span>
+    </div>
+  </h1>
+
+  <p class="subhead">
+    <span class="concept-copy copy-onyx">While other local outfits are still running a phone number and a Facebook page, Always Plumbing &amp; Drainage runs a fully licensed, fully equipped operation — every job, every time.</span>
+    <span class="concept-copy copy-delta">Servicing Warragul, Drouin, Leongatha and all Gippsland suburbs under Licence No. 109947, ABN 54 154 664 772 — fully licensed, registered, and equipped for sewerage, drainage, gas fitting, and general plumbing work.</span>
+    <span class="concept-copy copy-cove">From sewerage and drainage to gas fitting and CCTV diagnostics, owner-operated by Daniel Maddock — one job, one standard, across all of Gippsland.</span>
+  </p>
+
+  <div class="cta-row">
+    <a href="tel:+61497871119" class="btn btn-primary">
+      <span class="concept-copy copy-onyx">See Why Gippsland Is Switching</span>
+      <span class="concept-copy copy-delta">Request a Service Callout</span>
+      <span class="concept-copy copy-cove">Book Your Service</span>
+    </a>
+    <a href="tel:+61497871119" class="btn btn-ghost">Call 0497 871 119</a>
+  </div>
+
+  <div class="rating-badge">★★★★★ &nbsp;<strong>5.0</strong> rated · Fully Licensed &amp; Registered · Lic No. 109947</div>
+</section>
+
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Sewerage &amp; Drainage</span><span>Gas Fitting</span><span>CCTV Camera &amp; Water Jet</span>
+    <span>General Plumbing &amp; Home Maintenance</span><span>Licensed &amp; Registered</span><span>All Gippsland Suburbs</span>
+    <span>Sewerage &amp; Drainage</span><span>Gas Fitting</span><span>CCTV Camera &amp; Water Jet</span>
+    <span>General Plumbing &amp; Home Maintenance</span><span>Licensed &amp; Registered</span><span>All Gippsland Suburbs</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">
+      <span class="concept-copy copy-onyx">The Difference</span>
+      <span class="concept-copy copy-delta">Credentials on Record</span>
+      <span class="concept-copy copy-cove">Why Gippsland Chooses Always</span>
+    </div>
+    <h2 class="section-title">
+      <span class="concept-copy copy-onyx">Equipped for work most local plumbers turn away.</span>
+      <span class="concept-copy copy-delta">Every job backed by a licensed, registered, insured operator.</span>
+      <span class="concept-copy copy-cove">A plumbing service built to grow with Gippsland.</span>
+    </h2>
+  </div>
+  <div class="credential-grid">
+    <div class="credential"><span class="num">109947</span><div class="desc">Fully Licensed &amp; Registered Plumber — Licence No.</div></div>
+    <div class="credential"><span class="num">1.7t</span><div class="desc">Owner-operated excavator, on site for drainage &amp; sewerage work</div></div>
+    <div class="credential"><span class="num">24/7</span><div class="desc">Available for emergency call-outs across Gippsland</div></div>
+    <div class="credential"><span class="num">5.0★</span><div class="desc">Customer rating — fully licensed &amp; equipment on board at all times</div></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <div class="section-eyebrow">Services</div>
+    <h2 class="section-title">Full-scope plumbing &amp; drainage</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 2 4 9v13h16V9z"/><path d="M9 22V12h6v10"/></svg>
+      <h3>Sewerage &amp; Drainage</h3>
+      <p>Full sewerage and drainage work, including excavation via owner-operated 1.7 tonne excavator.</p>
+    </div>
+    <div class="service-card">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+      <h3>CCTV Camera &amp; Water Jet</h3>
+      <p>Camera drain inspection and high-pressure water jetting for fast, accurate diagnostics.</p>
+    </div>
+    <div class="service-card">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 2v6M8 8h8l2 4-2 4H8l-2-4z"/></svg>
+      <h3>Gas Fitting</h3>
+      <p>Licensed gas fitting for residential and light commercial properties.</p>
+    </div>
+    <div class="service-card">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M3 12h18M12 3v18"/></svg>
+      <h3>General Plumbing &amp; Home Maintenance</h3>
+      <p>Everyday repairs and maintenance, handled by a fully licensed, on-call operator.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <div class="section-eyebrow">Service Area</div>
+    <h2 class="section-title">
+      <span class="concept-copy copy-onyx">Covering Gippsland — properly.</span>
+      <span class="concept-copy copy-delta">Servicing the Baw Baw &amp; South Gippsland Shire region.</span>
+      <span class="concept-copy copy-cove">Growing across every Gippsland suburb.</span>
+    </h2>
+  </div>
+  <div class="area-list">
+    <div class="area-pill">Warragul</div>
+    <div class="area-pill">Drouin</div>
+    <div class="area-pill">Leongatha</div>
+    <div class="area-pill">Trida</div>
+    <div class="area-pill">Mount Worth</div>
+    <div class="area-pill">All Gippsland Suburbs</div>
+  </div>
+</section>
+
+<div class="contact-band">
+  <h2 class="section-title">
+    <span class="concept-copy copy-onyx">Ready when you are.</span>
+    <span class="concept-copy copy-delta">Request your licensed callout.</span>
+    <span class="concept-copy copy-cove">Let's get started.</span>
+  </h2>
+  <a href="tel:+61497871119" class="phone">0497 871 119</a>
+  <div style="color:var(--fg-muted); font-size:13px;">maddock87@icloud.com · ABN 54 154 664 772</div>
+</div>
+
+<footer>
+  <div class="wordmark"><i>Always</i> <b>PLUMBING &amp; DRAINAGE</b></div>
+  <div>Concept demo — prepared for review · not a live client site</div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.switcher-tabs button');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.documentElement.setAttribute('data-concept', btn.dataset.set);
+      buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      // restart headline reveal animation on switch
+      document.querySelectorAll('.headline .line span').forEach(el => {
+        el.style.animation = 'none';
+        void el.offsetWidth;
+        el.style.animation = '';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
