@@ -238,9 +238,8 @@ html[data-concept="cove"] span.copy-cove { display: inline; }
 .compare-col ul { list-style: none; }
 .compare-col li { font-size: 14px; padding: 8px 0; border-top: 1px solid var(--line); color: var(--fg-muted); }
 .compare-col li:first-child { border-top: none; }
-.compare-us li { color: var(--fg); }
-.compare-us li::before { content: '✓ '; color: var(--accent); font-weight: 700; }
-.compare-them li::before { content: '— '; color: var(--fg-muted); }
+.compare-us li { color: var(--fg); border-left: 2px solid var(--accent); padding-left: 12px; margin-left: -1px; }
+.compare-them li { padding-left: 14px; }
 
 /* ---------- job photo slots — placeholder, not real photos, ready to swap ---------- */
 .job-gallery {
@@ -297,9 +296,9 @@ html[data-concept="cove"] span.copy-cove { display: inline; }
   background: var(--bg-raised);
 }
 .service-card.service-card-lg { padding: 34px; }
-.service-card .icon {
-  width: 36px; height: 36px; margin-bottom: 18px;
-  stroke: var(--accent); fill: none; stroke-width: 1.6;
+.service-card .index-num {
+  font-family: var(--font-serif); font-weight: 300; font-size: 2.1rem; color: var(--accent);
+  display: block; margin-bottom: 16px; line-height: 1;
 }
 .service-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
 .service-card p { font-size: 13.5px; color: var(--fg-muted); }
